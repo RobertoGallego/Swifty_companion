@@ -35,8 +35,8 @@ const App: () => Node = () => {
             method: "post",
             baseURL: "https://api.intra.42.fr/oauth/token",
             auth: {
-              username: "489a20190ddb89ccab6beda0ae313447ff35907230f4ae66482ad9853945d5be",
-              password: "0d5d58a994464edcfac3c33d9c5c2db0e773d68004a91c34a375e367f1ba9cc7"
+              username: "env",
+              password: "env"
             },
             data: {
               "grant_type": "client_credentials",
