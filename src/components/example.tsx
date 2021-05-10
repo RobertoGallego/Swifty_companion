@@ -16,6 +16,7 @@ const Hello: React.FC<Props> = ({
 
   const onIncrement = () =>
     setEnthusiasmLevel(enthusiasmLevel + 1);
+    
   const onDecrement = () =>
     setEnthusiasmLevel(
       enthusiasmLevel > 0 ? enthusiasmLevel - 1 : 0
@@ -50,14 +51,15 @@ const Hello: React.FC<Props> = ({
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
   },
   greeting: {
     fontSize: 20,
     fontWeight: 'bold',
-    margin: 16
+    margin: 16,
+    color: "white"
   }
 });
 
