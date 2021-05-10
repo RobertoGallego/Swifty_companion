@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         paddingVertical: 12,
         fontSize: 16,
-        textAlign: "center"
+        paddingHorizontal: 15
     },
     searchButton: {
         borderBottomWidth: 2,

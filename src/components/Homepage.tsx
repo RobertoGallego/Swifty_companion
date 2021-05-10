@@ -28,14 +28,12 @@ const HomeScreen: React.FC<Props> = ({navigation}) => {
                 {/* <ScrollView> */}
                     <View style={styles.searchContainer}>
                         <Image source={Logo_42_w} style={styles.imageLogo}/>
-                        {/* <Text>HOME</Text> */}
+                        {/* <Text>USER</Text> */}
                             <TextInput 
                                 style={styles.searchInput} 
                                 autoCapitalize="none" 
-                                placeholder={"John doe"} 
-                                placeholderTextColor="#2E323E"
-                                // placeholderFontStyle= 'italic'
-                                // placeholderFontSize="italic"
+                                placeholder={"John Doe..."} 
+                                placeholderTextColor="#86ac94"
                                 clearButtonMode="always"
                             />
                             <TouchableOpacity 
