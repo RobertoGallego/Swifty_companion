@@ -12,11 +12,40 @@ const styles = StyleSheet.create({
         resizeMode: "cover",
         justifyContent: "center"
     },
-    button: {
+    imageLogo: {
+        alignSelf: "center",
+        marginBottom: 80,
         width: 150,
-        backgroundColor: "red",
-        alignSelf: "center"
+        height: 110,
     },
+    searchContainer: {
+        width: "70%",
+        alignSelf: "center",
+        borderColor: "#fff",
+    },
+    searchInput: {
+        borderBottomWidth: 2,
+        borderColor: "#fff",
+        backgroundColor: "#476954",
+        color: "#fff",
+        marginBottom: 40,
+        borderRadius: 5,
+        paddingVertical: 12,
+        fontSize: 16,
+        textAlign: "center"
+    },
+    searchButton: {
+        borderBottomWidth: 2,
+        borderColor: "#fff",
+        backgroundColor: "#2E323E",
+        borderRadius: 5,
+        paddingVertical: 14 
+    },
+    searchButtonText: {
+        alignSelf: "center",
+        color: "#fff",
+        fontWeight: "bold"
+    }
 });
 
 export default styles;

@@ -1,26 +1,20 @@
 import 'react-native-gesture-handler';
 import React from 'react'
 import type { Node } from 'react';
-// const axios = require('axios').default;
-// import { Route, Link } from "react-router-native";
-import { NavigationContainer } from '@react-navigation/native';
+
+import {
+    ImageBackground,
+    SafeAreaView,
+} from 'react-native';
 
 import Axios from "axios"
 
-import {
-    Button,
-    ImageBackground,
-    SafeAreaView,
-    View,
-} from 'react-native';
+import Navigation from "src/navigation/Navigation"
 
 import styles from "src/assets/App";
-import { Background_home } from "src/assets/images"
-import Example from "src/components/example"
+import { Background_home } from "src/assets/Images"
+// import Example from "src/components/Example"
 
-// import Profile from "src/components/Profile"
-
-// client_credentials
 
 const App: () => Node = () => {
     // POST
@@ -49,24 +43,23 @@ const App: () => Node = () => {
     });  
     
     return (
-        <NavigationContainer>
-            <SafeAreaView style={styles.container}>
-                <ImageBackground source={Background_home} style={styles.imageBackground}>
-                    <View>
-                        <View style={styles.button}>
-                            <Button
-                                // style={styles.button}
-                                onPress={() => {console.log("ok")}}
-                                title="Learn More"
-                                // color="#841584"
-                                accessibilityLabel="Learn more about this purple button"
-                            />
-                        </View>
+        <SafeAreaView style={styles.container}>
+            <ImageBackground source={Background_home} style={styles.imageBackground}>
+                <Navigation />
+                {/* <View>
+                    <View style={styles.button}>
+                        <Button
+                            // style={styles.button}
+                            onPress={() => {console.log("ok")}}
+                            title="Learn More"
+                            // color="#841584"
+                            accessibilityLabel="Learn more about this purple button"
+                        />
                     </View>
-                    <Example name={"swifty companion"} />
-                </ImageBackground>
-            </SafeAreaView>
-        </NavigationContainer>
+                </View>
+                <Example name={"swifty companion"} /> */}
+            </ImageBackground>
+        </SafeAreaView>
     )
 }
 
