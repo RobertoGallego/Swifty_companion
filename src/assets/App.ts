@@ -12,6 +12,12 @@ const styles = StyleSheet.create({
         resizeMode: "cover",
         justifyContent: "center"
     },
+    loadingText: {
+        alignSelf: "center",
+        color: "#fff",
+        fontWeight: "bold",
+        fontSize: 16,
+    },
     imageLogo: {
         alignSelf: "center",
         marginBottom: 80,
@@ -25,7 +31,7 @@ const styles = StyleSheet.create({
     },
     searchInput: {
         borderBottomWidth: 2,
-        borderColor: "#fff",
+        borderColor: "#86ac94",
         backgroundColor: "#476954",
         color: "#fff",
         marginBottom: 40,
@@ -36,7 +42,7 @@ const styles = StyleSheet.create({
     },
     searchButton: {
         borderBottomWidth: 2,
-        borderColor: "#fff",
+        borderColor: "#4c5367",
         backgroundColor: "#2E323E",
         borderRadius: 5,
         paddingVertical: 14 

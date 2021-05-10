@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import {
     SafeAreaView,
@@ -12,17 +12,42 @@ import {
     Image
 } from 'react-native';
 
+import Axios from "axios"
+
 import styles from "src/assets/App";
 import { Background_home, Logo_42_w } from "src/assets/Images"
 
 
 export type Props = {
     navigation: any;
+    token: any
 };
 
-const HomeScreen: React.FC<Props> = ({navigation}) => {
-    return (
+const HomeScreen: React.FC<Props> = ({navigation, token}) => {
+    const [User, setUser] = useState("tefourge")
+    console.log("user", User, "token 2", token)
 
+    useEffect(() => {
+        console.log(token)
+
+        Axios.get(`https://api.intra.42.fr/v2/users/${User}`, 
+            {
+                headers: { 
+                    Authorization: `Bearer ${token}`,
+                }
+            })
+            .then(function (response: any) {
+                console.log("res", response);
+            })
+            .catch(function (error: string) {
+                console.log("err", error);
+            })
+            .then(function () {
+                // always executed
+        });  
+    }, [])
+
+    return (
         <SafeAreaView style={styles.container}>
             <ImageBackground source={Background_home} style={styles.imageBackground}>
                 {/* <ScrollView> */}

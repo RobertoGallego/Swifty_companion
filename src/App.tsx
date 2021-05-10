@@ -1,10 +1,13 @@
 import 'react-native-gesture-handler';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import type { Node } from 'react';
+import {decode, encode} from 'base-64'
 
 import {
     ImageBackground,
     SafeAreaView,
+    View,
+    Text
 } from 'react-native';
 
 import Axios from "axios"
@@ -15,49 +18,50 @@ import styles from "src/assets/App";
 import { Background_home } from "src/assets/Images"
 // import Example from "src/components/Example"
 
-
 const App: () => Node = () => {
-    // POST
-    // useEffect(() => {
-    //     effect
-    //     return () => {
-    //         cleanup
-    //     }
-    // }, [input])
-    // const image = { uri: "src/assets/background_home.jpg" };
+    const [Token, setToken] = useState<any>([])
 
-    Axios.get('https://api.intra.42.fr/v2/users/tefourge', 
-        {
-            headers: { 
-                Authorization: "Bearer c822f5461c421b5349936a3243a8bee7a8aae98e90e28d4d4063bc9e1127712e" 
-            }}
-        )
-        .then(function (response: any) {
-            console.log("res", response);
-        })
-        .catch(function (error: string) {
-            console.log("err", error);
-        })
-        .then(function () {
-            // always executed
-    });  
-    
+    if (!global.btoa) {
+        global.btoa = encode;
+    }
+
+    if (!global.atob) {
+        global.atob = decode;
+    }
+    // POST ENV
+    useEffect(() => {
+        Axios.request({
+            // url: "/oauth/token",
+            method: "post",
+            baseURL: "https://api.intra.42.fr/oauth/token",
+            auth: {
+              username: "489a20190ddb89ccab6beda0ae313447ff35907230f4ae66482ad9853945d5be",
+              password: "0d5d58a994464edcfac3c33d9c5c2db0e773d68004a91c34a375e367f1ba9cc7"
+            },
+            data: {
+              "grant_type": "client_credentials",
+              "scope": "public"    
+            }
+        }).then(respose => {
+            // console.log("post", respose.data);  
+            setToken(respose.data)
+        }); 
+    }, [])
+
+    console.log(Token)
+
     return (
         <SafeAreaView style={styles.container}>
             <ImageBackground source={Background_home} style={styles.imageBackground}>
-                <Navigation />
-                {/* <View>
-                    <View style={styles.button}>
-                        <Button
-                            // style={styles.button}
-                            onPress={() => {console.log("ok")}}
-                            title="Learn More"
-                            // color="#841584"
-                            accessibilityLabel="Learn more about this purple button"
-                        />
+                { Token !== undefined 
+                ? 
+                    <Navigation token={Token.access_token}/>
+                :
+                    <View>
+                        <Text style={styles.loadingText}>Loading...</Text>
                     </View>
-                </View>
-                <Example name={"swifty companion"} /> */}
+                }
+                {/* <Example name={"swifty companion"} /> */}
             </ImageBackground>
         </SafeAreaView>
     )
