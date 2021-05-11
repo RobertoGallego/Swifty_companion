@@ -22,11 +22,11 @@ export type Props = {
 const HomeScreen: React.FC<Props> = ({route, navigation}) => {
     const { response } = route.params;
 
-    console.log("response --->", response.data.first_name);
+    console.log("response --->", response.data);
 
     return (
 
-        <SafeAreaView style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+        <SafeAreaView style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
             <ImageBackground source={Background_home} style={styles.imageBackground}>
                 {/* <ScrollView> */}
                     <View style={{ display: "flex", justifyContent: "flex-start", alignItems: "center", borderColor: "#fff",}}>

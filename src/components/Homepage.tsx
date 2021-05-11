@@ -58,21 +58,30 @@ const HomeScreen: React.FC<Props> = ({navigation, token}) => {
     }
     
     const handleSearch = () => {
+        let regex = new RegExp('^[a-zA-Z]{3,20}$')
+        
         setLoading(true);
-        Axios.get(`https://api.intra.42.fr/v2/users/${NewSearch}`, {
-                headers: { Authorization: `Bearer ${token}` }
-            })
-            .then(function (response: any) {
-                setError(false);
-                setLoading(false);
-                navigation.navigate("Profile", { response: response })
-                console.log("res", response.data.first_name);
-            })
-            .catch(function (error: string) {
-                setError(true);
-                setLoading(false);
-                console.log("err get ", error);
-            });  
+        if (regex.test(NewSearch)) {
+        
+            Axios.get(`https://api.intra.42.fr/v2/users/${NewSearch}`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                })
+                .then(function (response: any) {
+                    setError(false);
+                    setLoading(false);
+                    navigation.navigate("Profile", { response: response })
+                    console.log("res", response.data.first_name);
+                })
+                .catch(function (error: string) {
+                    setError(true);
+                    setLoading(false);
+                    console.log("err get ", error);
+                }
+            );  
+        } else {
+            setError(true);
+        }
+        
     }
 
     return (
@@ -90,6 +99,7 @@ const HomeScreen: React.FC<Props> = ({navigation, token}) => {
                                 placeholderTextColor="#86ac94"
                                 clearButtonMode="always"
                                 value={NewSearch}
+                                maxLength={20}
                             />
                             { Error ? 
                                 <Text style={styles.searchError}>Upss! user not found</Text>
