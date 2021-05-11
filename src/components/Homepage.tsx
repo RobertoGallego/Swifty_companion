@@ -9,7 +9,8 @@ import {
     ImageBackground,
     TextInput,
     TouchableOpacity,
-    Image
+    Image,
+    ActivityIndicator
 } from 'react-native';
 
 import Axios from "axios"
@@ -26,6 +27,8 @@ export type Props = {
 const HomeScreen: React.FC<Props> = ({navigation, token}) => {
     // const [User, setUser] = useState("tefourge");
     const [NewSearch, setNewSearch] = useState("");
+    const [Error, setError] = useState(false);
+    const [Loading, setLoading] = useState(false);
 
     
     // console.log("NewSearch", NewSearch)
@@ -53,16 +56,21 @@ const HomeScreen: React.FC<Props> = ({navigation, token}) => {
     const updateSearch = (value: string) => {
         setNewSearch(value);
     }
-
+    
     const handleSearch = () => {
+        setLoading(true);
         Axios.get(`https://api.intra.42.fr/v2/users/${NewSearch}`, {
                 headers: { Authorization: `Bearer ${token}` }
             })
             .then(function (response: any) {
+                setError(false);
+                setLoading(false);
                 navigation.navigate("Profile", { response: response })
                 console.log("res", response.data.first_name);
             })
             .catch(function (error: string) {
+                setError(true);
+                setLoading(false);
                 console.log("err get ", error);
             });  
     }
@@ -83,14 +91,20 @@ const HomeScreen: React.FC<Props> = ({navigation, token}) => {
                                 clearButtonMode="always"
                                 value={NewSearch}
                             />
-                            {/* {
-                                Error message
-                            } */}
+                            { Error ? 
+                                <Text style={styles.searchError}>Upss! user not found</Text>
+                            :
+                                <Text style={styles.searchError}></Text>
+                            }
                             <TouchableOpacity 
                                 style={styles.searchButton}
                                 onPress={ () => handleSearch() }
                             >
-                                <Text style={styles.searchButtonText}>SEARCH</Text>
+                                { Loading ?
+                                    <ActivityIndicator size="small" color="#fff" />
+                                :
+                                    <Text style={styles.searchButtonText}>SEARCH</Text>
+                                }
                             </TouchableOpacity>
                     </View>
                 {/* </ScrollView> */}
