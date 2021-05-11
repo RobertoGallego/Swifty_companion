@@ -35,8 +35,8 @@ const App: () => Node = () => {
             method: "post",
             baseURL: "https://api.intra.42.fr/oauth/token",
             auth: {
-              username: "env",
-              password: "env"
+              username: "489a20190ddb89ccab6beda0ae313447ff35907230f4ae66482ad9853945d5be",
+              password: "0d5d58a994464edcfac3c33d9c5c2db0e773d68004a91c34a375e367f1ba9cc7"
             },
             data: {
               "grant_type": "client_credentials",
@@ -45,10 +45,12 @@ const App: () => Node = () => {
         }).then(respose => {
             // console.log("post", respose.data);  
             setToken(respose.data)
+        }).catch(function (error: string) {
+            console.log("err post ", error);
         }); 
     }, [])
 
-    console.log(Token)
+    console.log("New Token", Token)
 
     return (
         <SafeAreaView style={styles.container}>

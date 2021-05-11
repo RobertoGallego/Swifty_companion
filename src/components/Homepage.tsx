@@ -24,28 +24,48 @@ export type Props = {
 };
 
 const HomeScreen: React.FC<Props> = ({navigation, token}) => {
-    const [User, setUser] = useState("tefourge")
-    console.log("user", User, "token 2", token)
+    // const [User, setUser] = useState("tefourge");
+    const [NewSearch, setNewSearch] = useState("");
 
-    useEffect(() => {
-        console.log(token)
+    
+    // console.log("NewSearch", NewSearch)
 
-        Axios.get(`https://api.intra.42.fr/v2/users/${User}`, 
-            {
-                headers: { 
-                    Authorization: `Bearer ${token}`,
-                }
+    // useEffect(() => {
+    //     console.log("Homepage token", token)
+
+    //     Axios.get(`https://api.intra.42.fr/v2/users/${NewSearch}`, 
+    //         {
+    //             headers: { 
+    //                 Authorization: `Bearer ${token}`,
+    //             }
+    //         })
+    //         .then(function (response: any) {
+    //             console.log("res", response.data.first_name);
+    //         })
+    //         .catch(function (error: string) {
+    //             console.log("err get ", error);
+    //         })
+    //         .then(function () {
+    //             // always executed
+    //     });  
+    // }, [])
+
+    const updateSearch = (value: string) => {
+        setNewSearch(value);
+    }
+
+    const handleSearch = () => {
+        Axios.get(`https://api.intra.42.fr/v2/users/${NewSearch}`, {
+                headers: { Authorization: `Bearer ${token}` }
             })
             .then(function (response: any) {
-                console.log("res", response);
+                navigation.navigate("Profile", { response: response })
+                console.log("res", response.data.first_name);
             })
             .catch(function (error: string) {
-                console.log("err", error);
-            })
-            .then(function () {
-                // always executed
-        });  
-    }, [])
+                console.log("err get ", error);
+            });  
+    }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -55,17 +75,20 @@ const HomeScreen: React.FC<Props> = ({navigation, token}) => {
                         <Image source={Logo_42_w} style={styles.imageLogo}/>
                         {/* <Text>USER</Text> */}
                             <TextInput 
+                                onChangeText={ (value) => updateSearch(value) }
                                 style={styles.searchInput} 
                                 autoCapitalize="none" 
                                 placeholder={"John Doe..."} 
                                 placeholderTextColor="#86ac94"
                                 clearButtonMode="always"
+                                value={NewSearch}
                             />
+                            {/* {
+                                Error message
+                            } */}
                             <TouchableOpacity 
                                 style={styles.searchButton}
-                                onPress={() =>
-                                navigation.navigate("Profile")
-                                }
+                                onPress={ () => handleSearch() }
                             >
                                 <Text style={styles.searchButtonText}>SEARCH</Text>
                             </TouchableOpacity>
@@ -75,6 +98,8 @@ const HomeScreen: React.FC<Props> = ({navigation, token}) => {
         </SafeAreaView>
       
     );
-  };
+};
+
+
 
 export default HomeScreen
