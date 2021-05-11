@@ -56,7 +56,7 @@ const HomeScreen: React.FC<Props> = ({ navigation, token }) => {
   };
 
   const handleSearch = () => {
-    let regex = new RegExp("^[a-zA-Z]{3,20}$");
+    let regex = new RegExp("^[a-zA-Z-]{3,20}$");
 
     setLoading(true);
     if (regex.test(NewSearch)) {

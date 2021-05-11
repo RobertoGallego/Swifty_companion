@@ -131,7 +131,7 @@ const HomeScreen: React.FC<Props> = ({ route, navigation }) => {
                         ? cursusDatas?.level.toString().split(".")[1] + "%"
                         : "0%",
                     position: "absolute",
-                    height: 30,
+                    height: 25,
                     left: 0,
                     borderRadius: 100,
                   }}
@@ -181,29 +181,46 @@ const HomeScreen: React.FC<Props> = ({ route, navigation }) => {
                   <View
                     style={{
                       display: "flex",
-                      flexDirection: "row",
-                      justifyContent: "space-between",
+                      flexDirection: "column",
                     }}
                   >
-                    <Text
+                    <View
                       style={{
-                        fontSize: 15,
-                        color: "rgba(255,255,255,1)",
-                        marginVertical: 5,
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
                       }}
                     >
-                      {e.name}{" "}
-                    </Text>
-                    <Text
+                      <Text
+                        style={{
+                          fontSize: 15,
+                          color: "rgba(255,255,255,1)",
+                          marginVertical: 5,
+                        }}
+                      >
+                        {e.name}{" "}
+                      </Text>
+                      <Text
+                        style={{
+                          fontSize: 15,
+                          color: "rgba(255,255,255,1)",
+                          marginVertical: 5,
+                          fontWeight: "bold",
+                        }}
+                      >
+                        {e.level}
+                      </Text>
+                    </View>
+                    <View
                       style={{
-                        fontSize: 15,
-                        color: "rgba(255,255,255,1)",
-                        marginVertical: 5,
-                        fontWeight: "bold",
+                        height: 3,
+                        backgroundColor: "#33C47F",
+                        width:
+                          e.level >= 0
+                            ? e.level.toFixed(2).toString().split(".")[1] + "%"
+                            : "0%",
                       }}
-                    >
-                      {e.level}
-                    </Text>
+                    ></View>
                   </View>
                 ))}
             </View>

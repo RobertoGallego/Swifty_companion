@@ -72,11 +72,11 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0,0,0,0.5)",
     width: "90%",
     borderRadius: 100,
-    height: 30,
+    height: 25,
   },
   cursusLevelText: {
     color: "#fff",
-    fontSize: 20,
+    fontSize: 18,
     position: "absolute",
   },
   cursusList: {
