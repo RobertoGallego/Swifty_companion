@@ -25,13 +25,6 @@ const HomeScreen: React.FC<Props> = ({ route, navigation }) => {
   const { response } = route.params;
   const location =
     response.data.location !== null ? response.data.location : "Unavailable";
-  const cursus21 = response.data.cursus_users.find(
-    (e: any) => e.cursus_id === currentCursus
-  );
-  console.log("response --->", response.data);
-  console.log("Current cursus =>", currentCursus);
-  console.log("Selected cursus =>", cursusDatas);
-
   useEffect(() => {
     const newCursus = response.data.cursus_users.find(
       (e: any) => e.cursus_id === currentCursus
@@ -207,8 +200,9 @@ const HomeScreen: React.FC<Props> = ({ route, navigation }) => {
                           marginVertical: 5,
                           fontWeight: "bold",
                         }}
+                        numberOfLines={1}
                       >
-                        {e.level}
+                        {e.level.toString().substring(0, 4)}
                       </Text>
                     </View>
                     <View

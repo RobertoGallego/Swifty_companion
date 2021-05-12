@@ -41,15 +41,12 @@ const App: () => Node = () => {
       },
     })
       .then((respose) => {
-        // console.log("post", respose.data);
         setToken(respose.data);
       })
       .catch(function (error: string) {
         console.log("err post ", error);
       });
   }, []);
-
-  console.log("New Token", Token);
 
   return (
     <SafeAreaView style={styles.container}>

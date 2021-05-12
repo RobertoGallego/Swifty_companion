@@ -24,32 +24,9 @@ export type Props = {
 };
 
 const HomeScreen: React.FC<Props> = ({ navigation, token }) => {
-  // const [User, setUser] = useState("tefourge");
   const [NewSearch, setNewSearch] = useState("");
   const [Error, setError] = useState(false);
   const [Loading, setLoading] = useState(false);
-
-  // console.log("NewSearch", NewSearch)
-
-  // useEffect(() => {
-  //     console.log("Homepage token", token)
-
-  //     Axios.get(`https://api.intra.42.fr/v2/users/${NewSearch}`,
-  //         {
-  //             headers: {
-  //                 Authorization: `Bearer ${token}`,
-  //             }
-  //         })
-  //         .then(function (response: any) {
-  //             console.log("res", response.data.first_name);
-  //         })
-  //         .catch(function (error: string) {
-  //             console.log("err get ", error);
-  //         })
-  //         .then(function () {
-  //             // always executed
-  //     });
-  // }, [])
 
   const updateSearch = (value: string) => {
     setNewSearch(value);
@@ -67,12 +44,10 @@ const HomeScreen: React.FC<Props> = ({ navigation, token }) => {
           setError(false);
           setLoading(false);
           navigation.navigate("Profile", { response: response });
-          console.log("res", response.data.first_name);
         })
         .catch(function (error: string) {
           setError(true);
           setLoading(false);
-          console.log("err get ", error);
         });
     } else {
       setError(true);
