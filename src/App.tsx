@@ -10,7 +10,7 @@ import Axios from "axios";
 import Navigation from "src/navigation/Navigation";
 
 import styles from "src/assets/App";
-import { Background_home } from "src/assets/images";
+import { Background_home } from "src/assets/Images";
 // import Example from "src/components/Example"
 
 const App: () => Node = () => {
@@ -47,6 +47,8 @@ const App: () => Node = () => {
         console.log("err post ", error);
       });
   }, []);
+
+//   console.log("token", Token)
 
   return (
     <SafeAreaView style={styles.container}>

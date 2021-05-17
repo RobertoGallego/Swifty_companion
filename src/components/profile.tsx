@@ -5,14 +5,13 @@ import {
   ScrollView,
   Text,
   View,
-  Button,
   ImageBackground,
   TouchableOpacity,
   Image,
 } from "react-native";
 
 import styles from "src/assets/App";
-import { Background_home } from "src/assets/images";
+import { Background_home } from "src/assets/Images";
 
 export type Props = {
   navigation: any;
@@ -21,7 +20,7 @@ export type Props = {
 
 const HomeScreen: React.FC<Props> = ({ route, navigation }) => {
   const [currentCursus, setCurrentCursus] = useState(21);
-  const [cursusDatas, setCursusDatas] = useState(false);
+  const [cursusDatas, setCursusDatas] = useState<any>(false);
   const { response } = route.params;
   const location =
     response.data.location !== null ? response.data.location : "Unavailable";
@@ -136,8 +135,9 @@ const HomeScreen: React.FC<Props> = ({ route, navigation }) => {
             </View>
             <View style={styles.cursusList}>
               {response.data.cursus_users.length > 1 &&
-                response.data.cursus_users.map((cursus: any) => (
+                response.data.cursus_users.map((cursus: any, index: number) => (
                   <TouchableOpacity
+                    key={index}
                     style={[styles.cursusButton]}
                     onPress={() => setCurrentCursus(cursus.cursus.id)}
                   >
@@ -170,12 +170,13 @@ const HomeScreen: React.FC<Props> = ({ route, navigation }) => {
                 </Text>
               </View>
               {cursusDatas &&
-                cursusDatas?.skills.map((e: any) => (
+                cursusDatas?.skills.map((e: any, index: number) => (
                   <View
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
+                    key={index}
+                        style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        }}
                   >
                     <View
                       style={{
@@ -240,13 +241,14 @@ const HomeScreen: React.FC<Props> = ({ route, navigation }) => {
                   Projects
                 </Text>
               </View>
-              {response.data.projects_users.map((e: any) => (
+              {response.data.projects_users.map((e: any, index: number) => (
                 <View
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                  }}
+                    key={index}
+                    style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                    }}
                 >
                   <Text
                     style={{

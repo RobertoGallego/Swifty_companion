@@ -16,7 +16,7 @@ import {
 import Axios from "axios";
 
 import styles from "src/assets/App";
-import { Background_home, Logo_42_w } from "src/assets/images";
+import { Background_home, Logo_42_w } from "src/assets/Images";
 
 export type Props = {
   navigation: any;
@@ -51,6 +51,7 @@ const HomeScreen: React.FC<Props> = ({ navigation, token }) => {
         });
     } else {
       setError(true);
+      setLoading(false);
     }
   };
 
