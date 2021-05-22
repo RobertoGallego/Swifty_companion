@@ -32,6 +32,10 @@ const HomeScreen: React.FC<Props> = ({ navigation, token }) => {
     setNewSearch(value);
   };
 
+  const handleReset = () => {
+    setNewSearch("");
+  };
+
   const handleSearch = () => {
     let regex = new RegExp("^[a-zA-Z-]{3,20}$");
 
@@ -43,6 +47,7 @@ const HomeScreen: React.FC<Props> = ({ navigation, token }) => {
         .then(function (response: any) {
           setError(false);
           setLoading(false);
+          setNewSearch("");
           navigation.navigate("Profile", { response: response });
         })
         .catch(function (error: string) {
@@ -62,16 +67,24 @@ const HomeScreen: React.FC<Props> = ({ navigation, token }) => {
         <View style={styles.searchContainer}>
           <Image source={Logo_42_w} style={styles.imageLogo} />
           {/* <Text>USER</Text> */}
-          <TextInput
-            onChangeText={(value) => updateSearch(value)}
-            style={styles.searchInput}
-            autoCapitalize="none"
-            placeholder={"John Doe..."}
-            placeholderTextColor="#86ac94"
-            clearButtonMode="always"
-            value={NewSearch}
-            maxLength={20}
-          />
+            <View style={{ position: "relative"}}>
+                <TextInput
+                    onChangeText={(value) => updateSearch(value)}
+                    style={styles.searchInput}
+                    autoCapitalize="none"
+                    placeholder={"John Doe..."}
+                    placeholderTextColor="#86ac94"
+                    clearButtonMode="always"
+                    value={NewSearch}
+                    maxLength={20}
+                />
+                <TouchableOpacity
+                    style={{ position: "absolute", right: 10, bottom: 57, width: 20, height: 20, backgroundColor: "#86ac94", borderRadius: 100 }}
+                    onPress={() => handleReset()}
+                >
+                    <Text style={{ alignSelf: "center", color: "#476954", fontWeight: "bold", lineHeight: 17.5 }}>x</Text>
+                </TouchableOpacity>
+            </View>
           {Error ? (
             <Text style={styles.searchError}>Upss! user not found</Text>
           ) : (
